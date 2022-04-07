@@ -1,26 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS + CSS Clock</title>
-</head>
-<body>
+<html lang=“en”>
+  <head>
+    <meta charset=“UTF-8">
+    <title>JS + CSS Clock</title>
+  </head>
 
-
-    <div class="clock">
-      <div class="clock-face">
+  <body>
+    <div class=“clock”>
+      <div class=“clock-face”>
+        <div class="num a12"> 12 </div>
+        <div class="num a1"> | </div>
+        <div class="num a2"> | </div>
+        <div class="a3"> 3 </div>
+        <div class="num a4"> | </div>
+        <div class="num a5"> | </div>
+        <div class=“a6”> 6 </div>
+        <div class="num a7"> | </div>
+        <div class="num a8"> | </div>
+        <div class=“a9"> 9 </div>
+        <div class="num a10"> | </div>
+        <div class="num a11"> | </div>
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
       </div>
     </div>
 
+    <style>
+    .clock .num {
+      --rotation: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transform: rotate(var(--rotation));
+      font-size: 1.5rem;
+    }
 
-  <style>
+    .clock .a1 { --rotation: 30deg; }
+    .clock .a2 { --rotation: 60deg; }
+    .clock .a3 { --rotation: 90deg; }
+    .clock .a4 { --rotation: 120deg; }
+    .clock .a5 { --rotation: 150deg; }
+    .clock .a6 { --rotation: 180deg; }
+    .clock .a7 { --rotation: 210deg; }
+    .clock .a8 { --rotation: 240deg; }
+    .clock .a9 { --rotation: 270deg; }
+    .clock .a10 { --rotation: 300deg; }
+    .clock .a11 { --rotation: 330deg; }
+
     html {
       background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
       background-size: cover;
-      font-family: 'helvetica neue';
+      font-family: ‘helvetica neue’;
       text-align: center;
       font-size: 10px;
     }
@@ -32,6 +64,24 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+    }
+
+    .a3 {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+    }
+
+    .a6 {
+      position: absolute;
+      bottom: 0px;
+      left: 50%;
+    }
+
+    .a9 {
+      position: absolute;
+      left: 0px;
+      top: 50%;
     }
 
     .clock {
@@ -54,21 +104,64 @@
       width: 100%;
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
+      /* border: 1px solid red; */
     }
 
     .hand {
-      width: 50%;
+      /* width: 50%; */
       height: 6px;
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(01, 2.4, 0.58, 1);
     }
 
+    .min-hand{
+      width: 15rem;
+    }
+
+    .hour-hand{
+      width: 10rem;
+      height: 8px;
+      background-color: lightcyan;
+      left: 16.7%;
+    }
+
+    .second-hand{
+      width: 15rem;
+      background-color: lightpink;
+    }
+
+    .fast {
+      transition: all 0s;
+    }
   </style>
 
-  <script>
-
-
-  </script>
-</body>
+    <script>
+      const secondHand = document.querySelector(‘.second-hand’);
+      const minHand = document.querySelector(‘.min-hand’);
+      const hourHand = document.querySelector(‘.hour-hand’);
+      function setDate() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60) * 360) + 90;
+        const mins = now.getMinutes();
+        const minsDegrees = ((mins/60) * 360) + 90;
+        const hours = now.getHours();
+        const hoursDegrees = ((hours/12) * 360) + 90 + ((mins/60) * 30);
+        if(seconds===0)
+          secondHand.classList.add(‘fast’);
+        if(seconds===1)
+          secondHand.classList.remove(‘fast’);
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        minHand.style.transform = `rotate(${minsDegrees}deg)`;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      }
+      // for every min out of 60, the hour hand needs to move by 6 deg
+      setInterval(setDate, 1000);
+    </script>
+  </body>
 </html>

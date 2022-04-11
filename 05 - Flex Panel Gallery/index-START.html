@@ -121,13 +121,16 @@
     </div>
 
     <script>
+      // select all panels
       const panels = document.querySelectorAll('.panel');
 
+      // define toggleOpen function
       function toggleOpen() {
         // console.log('Hello!'); CONNECTED
           this.classList.toggle('open');
       }
 
+      // define toggleAction function
       function toggleActive(e) {
         // console.log(e.propertyName); CONNECTED
         if (e.propertyName.includes('flex')) {
@@ -135,7 +138,10 @@
         }
       }
 
+      // add event listener to click that togglesOpen class
       panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+
+      // add event listener on transitionend that toggles toggleActive class
       panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
     </script>
   </body>

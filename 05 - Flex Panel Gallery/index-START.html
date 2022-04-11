@@ -69,6 +69,11 @@
       align-items: center;
     }
 
+    .panel > *:first-child { transform: translateY(-100%); }
+    .panel > *:first-child.open-active { transform: translateY(0); }
+    .panel > *:last-child { transform: translateY(100%); }
+    .panel > *:last-child.open-active { transform: translateY(0); }
+
     .panel p {
       text-transform: uppercase;
       font-family: 'Amatic SC', cursive;

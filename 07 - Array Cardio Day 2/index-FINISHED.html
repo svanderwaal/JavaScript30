@@ -56,8 +56,10 @@
     const index = comments.findIndex(comment => comment.id === 823423);
     console.log(index);
 
+    // using .splice method
     // comments.splice(index, 1);
 
+    // using new array and .slice method (NOT .splice method)
     const newComments = [
       ...comments.slice(0, index),
       ...comments.slice(index + 1)

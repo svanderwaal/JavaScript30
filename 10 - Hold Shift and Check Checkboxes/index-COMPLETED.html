@@ -96,14 +96,14 @@
     </div>
 
     <script>
-    // 1. select all checkboxes
+    // 1. SELECT all checkboxes
     const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
     // console.log(checkboxes); // check console log
 
     // 4. make variable
     let lastChecked;
 
-    // 3. add function
+    // 3. ADD function
     function handleCheck(e) {
       // console.log(e); // checking connection
 
@@ -130,7 +130,7 @@
       lastChecked = this;
     }
 
-    // 2. add event listener
+    // 2. ADD event listener
     checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 
 

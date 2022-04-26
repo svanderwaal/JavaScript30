@@ -109,15 +109,23 @@
 
       // 5a. check if they had the shift key down
       // 5b. AND check that they are checking it
-      let inbetween = false; // 7. defined inBetween variable
+      let inBetween = false; // 7. defined inBetween variable
       if (e.shiftKey && this.checked) {
-        // 6a. go ahead and do what we please
-        // 6b. loop over every single checkbox
+        // 6. go ahead and do what we please
+        // 8. loop over every single checkbox
         checkboxes.forEach(checkbox => {
           console.log(checkbox);
+          // 9. locating checked box and lastChecked
+          if (checkbox === this || checkbox === lastChecked) {
+            inBetween = !inBetween;
+            console.log('Starting to check inBetween')
+          }
+          // 10. toggling checked variable
+          if (inBetween) {
+            checkbox.checked = true;
+          }
         })
       }
-
 
       lastChecked = this;
     }

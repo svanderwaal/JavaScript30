@@ -59,32 +59,33 @@
         };
       }
 
-    const sliderImgs = document.querySelectorAll('.slide-in');
+      // selcting all imgs
+      const sliderImgs = document.querySelectorAll('.slide-in');
 
-    function checkSlide(e) {
-      // console.log('scrollY');
-      // console.log(window.scrollY);
-      // console.log('innerHeight');
-      // console.log(window.innerHeight);
-      sliderImgs.forEach(sliderImg => {
-        // calc value for half way of image
-        const slideInAt = (window.innerHeight + window.scrollY) - sliderImg.height / 2;
-        // console.log(slideInAt);
-        // value for bottom of the image
-        const imgBottom = sliderImg.offsetTop + sliderImg.height;
-        // console.log(imgBottom);
-        const isHalfShown = slideInAt > sliderImg.offsetTop;
-        const isNotScrolledPast = window.scrollY < imgBottom;
-        if (isHalfShown && isNotScrolledPast) {
-          sliderImg.classList.add('active');
-        } else {
-          sliderImg.classList.remove('active');
-        }
-      });
-    }
+      function checkSlide(e) {
+        // console.log('scrollY');
+        // console.log(window.scrollY);
+        // console.log('innerHeight');
+        // console.log(window.innerHeight);
+        sliderImgs.forEach(sliderImg => {
+          // calc value for half way of image
+          const slideInAt = (window.innerHeight + window.scrollY) - sliderImg.height / 2;
+          // console.log(slideInAt);
+          // value for bottom of the image
+          const imgBottom = sliderImg.offsetTop + sliderImg.height;
+          // console.log(imgBottom);
+          const isHalfShown = slideInAt > sliderImg.offsetTop;
+          const isNotScrolledPast = window.scrollY < imgBottom;
+          if (isHalfShown && isNotScrolledPast) {
+            sliderImg.classList.add('active');
+          } else {
+            sliderImg.classList.remove('active');
+          }
+        });
+      }
 
-    // event
-    window.addEventListener('scroll', debounce(checkSlide));
+      // define event listener
+      window.addEventListener('scroll', debounce(checkSlide));
 
     </script>
 
